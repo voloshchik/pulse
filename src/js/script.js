@@ -72,3 +72,25 @@ $(document).ready(function () {
   toggleClass('.catalog-item__link');
   toggleClass('.catalog-item__back');
 });
+
+//modal
+$('[data-modal=consultation]').on('click', () => {
+  console.log('click');
+  $('.overlay, #consultation').fadeIn();
+});
+
+$('.modal__close').on('click', function () {
+  $('.overlay,#consultation,#thanks,#order').fadeOut();
+});
+
+// $('.button_mini').on('click', function () {
+//   $('.overlay, #order').fadeIn();
+// });
+
+$('.button_mini').each(function (i) {
+  $(this).on('click', function () {
+    console.log('click');
+    $('#order .modal__description').text($('.catalog-item__subtitle').eq(i).text());
+    $('.overlay, #order').fadeIn();
+  });
+});
