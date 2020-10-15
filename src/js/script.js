@@ -71,26 +71,50 @@ $(document).ready(function () {
 
   toggleClass('.catalog-item__link');
   toggleClass('.catalog-item__back');
-});
 
-//modal
-$('[data-modal=consultation]').on('click', () => {
-  console.log('click');
-  $('.overlay, #consultation').fadeIn();
-});
-
-$('.modal__close').on('click', function () {
-  $('.overlay,#consultation,#thanks,#order').fadeOut();
-});
-
-// $('.button_mini').on('click', function () {
-//   $('.overlay, #order').fadeIn();
-// });
-
-$('.button_mini').each(function (i) {
-  $(this).on('click', function () {
+  //modal
+  $('[data-modal=consultation]').on('click', () => {
     console.log('click');
-    $('#order .modal__description').text($('.catalog-item__subtitle').eq(i).text());
-    $('.overlay, #order').fadeIn();
+    $('.overlay, #consultation').fadeIn();
   });
+
+  $('.modal__close').on('click', function () {
+    $('.overlay,#consultation,#thanks,#order').fadeOut();
+  });
+
+  // $('.button_mini').on('click', function () {
+  //   $('.overlay, #order').fadeIn();
+  // });
+
+  $('.button_mini').each(function (i) {
+    $(this).on('click', function () {
+      console.log('click');
+      $('#order .modal__description').text($('.catalog-item__subtitle').eq(i).text());
+      $('.overlay, #order').fadeIn();
+    });
+  });
+
+  valideForm('#consultation-form');
+  valideForm('#consultation form');
+  valideForm('#order form');
+
+  function valideForm(form) {
+    $(form).validate({
+      rules: {
+        name: 'required',
+        phone: 'required',
+        email: {
+          required: true,
+          email: true,
+        },
+      },
+      messages: {
+        name: 'Please specify your name',
+        email: {
+          required: 'We need your email address to contact you',
+          email: 'Your email address must be in the format of name@domain.com',
+        },
+      },
+    });
+  }
 });
