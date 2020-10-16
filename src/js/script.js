@@ -119,4 +119,19 @@ $(document).ready(function () {
   }
 
   $('input[name=phone]').mask('+375 (99) 999-9999');
+
+  $('form').submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'Post',
+      url: 'mailer/smart.php',
+      data: $(this).serialize(),
+    }).done(function () {
+      $(this).find('input').val('');
+      $('#consultation, #order').fadeOut();
+      $('.overlay, #thanks').fadeIn();
+      $('form').trigger('reset');
+    });
+    return false;
+  });
 });
